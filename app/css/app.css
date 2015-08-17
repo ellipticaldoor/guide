@@ -1,0 +1,7 @@
+* { text-align: center; }
+li, h1 { margin: 1em !important; }
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}

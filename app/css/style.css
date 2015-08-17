@@ -36,7 +36,7 @@ input
 	background-color: #fff;
 
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 115%;
+	font-size: 145%;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -63,18 +63,6 @@ p { margin: .9em .3em; }
 __________________________________________________________________________ */
 
 section { overflow: auto; }
-
-ul
-{
-	margin: 0;
-	padding: 0;
-
-	list-style-type: none;
-}
-
-li { display: inline; }
-
-li a { display: inline-block; }
 
 hr {
 	height: 1px;
