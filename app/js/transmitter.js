@@ -5,7 +5,6 @@ $(document).ready(function() {
 					   navigator.msGetUserMedia);
 
 	var stream = {};
-	var pear = {};
 	var call = {};
 
 	navigator.getUserMedia(
@@ -16,16 +15,14 @@ $(document).ready(function() {
 			stream = _stream;
 			peer = new Peer('transmitter', {host: 'localhost', port: 9000, path: '/'});
 			peer.on('open', function(id) {
-				$('#id').text('Your ID is '+id);
+				$('#id').text('you are connected');
 			});
 
-			// Receive A Call
-			peer.on('call', function(call) {
-				// Answer the call, providing our mediaStream
-				  call.answer(stream);
-
-				  // Got Data from call
-				call.on('stream', handleStream);
+			peer.on('connection', function(conn) {
+				conn.on('data', function(data){
+					console.log(data);
+					call = peer.call(data, stream);
+				});
 			});
 
 			var audio = document.querySelector('audio');
@@ -33,26 +30,7 @@ $(document).ready(function() {
 		},
 
 		function(err) {
-			console.log("The following error occured: " + err);
+			console.log("error: " + err);
 		}
 	);
-
-	// Make A Call
-	$('#call-btn').click(function() {
-		var id = $('#text').val()
-		if(id == '') {
-			alert('Provide An ID');
-		} else {
-			call = peer.call(id, stream);
-			$('#connection').text('Calling...');
-			call.on('stream', handleStream);
-		}
-	});
-
-	handleStream = function(peer_stream) {
-		$('#connection').text('Connected To Peer');
-		var peer_audio = $('#peer-audio');
-		peer_audio.attr('src', URL.createObjectURL(peer_stream));
-		peer_audio.get(0).play();
-	}
 })
