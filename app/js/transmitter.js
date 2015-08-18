@@ -14,7 +14,7 @@ $(document).ready(function() {
 		// successCallback
 		function(_stream) {
 			stream = _stream;
-			peer = new Peer({host: 'localhost', port: 9000, path: '/'});
+			peer = new Peer('transmitter', {host: 'localhost', port: 9000, path: '/'});
 			peer.on('open', function(id) {
 				$('#id').text('Your ID is '+id);
 			});
