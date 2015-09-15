@@ -1,7 +1,15 @@
 $(document).ready(function() {
 	var call = {};
 
-	peer = new Peer({host: 'localhost', port: 9000, path: '/'});
+	var getLocation = function(href) {
+		var l = document.createElement("a");
+		l.href = href;
+		return l;
+	};
+
+	var l = getLocation(document.URL);
+
+	peer = new Peer({host: l.hostname, port: 9000, path: '/'});
 
 	peer.on('open', function(id) {
 		$('#connection').text('calling...');

@@ -7,13 +7,21 @@ $(document).ready(function() {
 	var stream = {};
 	var call = {};
 
+	var getLocation = function(href) {
+		var l = document.createElement("a");
+		l.href = href;
+		return l;
+	};
+
+	var l = getLocation(document.URL);
+
 	navigator.getUserMedia(
 		{audio: true},
 
 		// successCallback
 		function(_stream) {
 			stream = _stream;
-			peer = new Peer('transmitter', {host: 'localhost', port: 9000, path: '/'});
+			peer = new Peer('transmitter', {host: l.hostname, port: 9000, path: '/'});
 			peer.on('open', function(id) {
 				$('#id').text('you are connected');
 			});
